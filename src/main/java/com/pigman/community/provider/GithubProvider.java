@@ -24,7 +24,7 @@ public class GithubProvider {
                     .build();
             try (Response response = client.newCall(request).execute()) {
                 String tokenStr = response.body().string();
-                System.out.println(tokenStr);
+                //System.out.println(tokenStr);
                 String token = tokenStr.split("&")[0].split("=")[1];
                 return getGithubUser(token);
 

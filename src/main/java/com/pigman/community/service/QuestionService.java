@@ -124,4 +124,20 @@ public class QuestionService {
         questionDTO.setUser(user);
         return questionDTO;
     }
+
+
+    /**
+     * 问题发布或更新功能
+     * @param question
+     */
+    public void createOrUpdate(Question question) {
+        //id不存在则新建数据库记录，存在则进行更新
+            if(question.getId() == null){
+                question.setGmtCreate(System.currentTimeMillis());
+                question.setGmtModified(question.getGmtCreate());
+                questionMapper.save(question);
+            }else{
+                questionMapper.update(question);
+            }
+    }
 }

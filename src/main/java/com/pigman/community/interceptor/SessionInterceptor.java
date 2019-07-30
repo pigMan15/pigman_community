@@ -27,7 +27,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 
                     //  System.out.println(request.getSession().getAttribute("user"));
                     if(user != null){
-                        System.out.println(user.toString());
+                        //System.out.println(user.toString());
                         request.getSession().setAttribute("user",user);
                     }else{
                         //当用户数据从数据库中被删除时，设置session中user的值为null，回到登录状态
