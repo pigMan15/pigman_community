@@ -15,8 +15,13 @@ public interface UserMapper {
     User findByToken(@Param("token") String token);
 
 
-    @Select("select * from `user` where `id` =  #{id}")
+    @Select("select * from `user` where `ID` =  #{id}")
     User findById(@Param("id")Integer id);
 
+    @Select("select * from `user` where `ACCOUNT_ID` =  #{accountId}")
+    User findByAccountId(@Param(value="accountId") String accountId);
+
+    @Update("update user  set `NAME`= #{name}, `AVATAR_URL`= #{avatarUrl}, `TOKEN` = #{token}, `GMT_MODIFIED` = #{gmtModified} where `id` = #{id}")
+    void update(User user);
 }
 

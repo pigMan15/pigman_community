@@ -7,6 +7,7 @@ import com.pigman.community.dto.AccessTokenDTO;
 import com.pigman.community.dto.GithubUser;
 import com.pigman.community.mapper.UserMapper;
 import com.pigman.community.provider.GithubProvider;
+import com.pigman.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class AuthorizeController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code, @RequestParam(name="state") String state, HttpServletRequest request, HttpServletResponse response){
 
@@ -61,11 +65,10 @@ public class AuthorizeController {
             user.setName(githubUser.getName());
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
+
             user.setAvatarUrl(githubUser.getAvatar_url());
 
-            userMapper.save(user);
+            userService.createOrUpdate(user);
 
             response.addCookie(new Cookie("token",token));
 
@@ -76,6 +79,15 @@ public class AuthorizeController {
         }
     }
 
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
+    }
 
 
 }
