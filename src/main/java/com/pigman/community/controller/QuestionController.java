@@ -19,6 +19,8 @@ public class QuestionController {
             @PathVariable(name="id")Integer id,
             Model model){
         QuestionDTO questionDTO = questionService.findById(id);
+        //累加评论
+        questionService.incView(id);
         //System.out.println(questionDTO.toString());
         model.addAttribute("question",questionDTO);
         return "question";

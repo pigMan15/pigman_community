@@ -5,6 +5,8 @@ import com.pigman.community.domain.QuestionExample;
 import com.pigman.community.domain.User;
 import com.pigman.community.dto.PaginationDTO;
 import com.pigman.community.dto.QuestionDTO;
+import com.pigman.community.exception.CustomizeErrorCode;
+import com.pigman.community.exception.CustomizeException;
 import com.pigman.community.mapper.QuestionMapper;
 import com.pigman.community.mapper.UserMapper;
 import org.apache.ibatis.session.RowBounds;
@@ -126,6 +128,9 @@ public class QuestionService {
 
     public QuestionDTO findById(Integer id) {
         Question question = questionMapper.selectByPrimaryKey(id);
+        if(question == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
         User user = userMapper.selectByPrimaryKey(question.getCreator());
@@ -153,7 +158,25 @@ public class QuestionService {
                 QuestionExample example = new QuestionExample();
                 example.createCriteria()
                         .andIdEqualTo(question.getId());
-                questionMapper.updateByExampleSelective(updateQuestion,example);
+                Integer result = questionMapper.updateByExampleSelective(updateQuestion,example);
+                if(result != 1){
+                    throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+                }
             }
+    }
+
+
+    /**
+     * 累加评论
+     * @param id
+     */
+    public void incView(Integer id) {
+        Question question = questionMapper.selectByPrimaryKey(id);
+        Question updateQuestion = new Question();
+        updateQuestion.setViewCount(question.getViewCount() + 1);
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.createCriteria()
+                .andIdEqualTo(id);
+        questionMapper.updateByExampleSelective(updateQuestion,questionExample);
     }
 }
