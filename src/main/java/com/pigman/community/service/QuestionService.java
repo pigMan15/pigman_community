@@ -7,6 +7,7 @@ import com.pigman.community.dto.PaginationDTO;
 import com.pigman.community.dto.QuestionDTO;
 import com.pigman.community.exception.CustomizeErrorCode;
 import com.pigman.community.exception.CustomizeException;
+import com.pigman.community.mapper.QuestionExtMapper;
 import com.pigman.community.mapper.QuestionMapper;
 import com.pigman.community.mapper.UserMapper;
 import org.apache.ibatis.session.RowBounds;
@@ -25,6 +26,10 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
 
     public PaginationDTO list(Integer page, Integer size){
@@ -171,12 +176,16 @@ public class QuestionService {
      * @param id
      */
     public void incView(Integer id) {
-        Question question = questionMapper.selectByPrimaryKey(id);
-        Question updateQuestion = new Question();
-        updateQuestion.setViewCount(question.getViewCount() + 1);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.createCriteria()
-                .andIdEqualTo(id);
-        questionMapper.updateByExampleSelective(updateQuestion,questionExample);
+//        Question question = questionMapper.selectByPrimaryKey(id);
+//        Question updateQuestion = new Question();
+//        updateQuestion.setViewCount(question.getViewCount() + 1);
+//        QuestionExample questionExample = new QuestionExample();
+//        questionExample.createCriteria()
+//                .andIdEqualTo(id);
+//        questionMapper.updateByExampleSelective(updateQuestion,questionExample);
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
