@@ -78,7 +78,7 @@ public class QuestionService {
     }
 
 
-    public PaginationDTO list(Integer userId,Integer page, Integer size){
+    public PaginationDTO list(Long userId,Integer page, Integer size){
         //对page < 0 或page > totalPage 非法请求进行处理
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria()
@@ -131,7 +131,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO findById(Integer id) {
+    public QuestionDTO findById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if(question == null){
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -153,6 +153,9 @@ public class QuestionService {
             if(question.getId() == null){
                 question.setGmtCreate(System.currentTimeMillis());
                 question.setGmtModified(question.getGmtCreate());
+                question.setViewCount(0);
+                question.setCommentCount(0);
+                question.setLikeCount(0);
                 questionMapper.insert(question);
             }else{
                 Question updateQuestion = new Question();
@@ -175,7 +178,7 @@ public class QuestionService {
      * 累加评论
      * @param id
      */
-    public void incView(Integer id) {
+    public void incView(Long id) {
 //        Question question = questionMapper.selectByPrimaryKey(id);
 //        Question updateQuestion = new Question();
 //        updateQuestion.setViewCount(question.getViewCount() + 1);
