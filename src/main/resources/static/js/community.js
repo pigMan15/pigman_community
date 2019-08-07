@@ -1,6 +1,9 @@
 function post(){
     var questionId = $("#question_id").val();
     var commentContent = $("#comment_content").val();
+    if(!commentContent){
+        alert("内容不能为空！");
+    }
     $.ajax({
        type:"POST",
        url:"/comment",
@@ -13,7 +16,8 @@ function post(){
        success:function(response){
            console.log(response)
            if(response.code == 200){
-                $("#comment_section").hide();
+               //评论提交成功时，刷新页面
+                window.location.reload();
            }else{
                if(response.code == 2003){
                    var isLogin = confirm("未登录，是否登录？");
