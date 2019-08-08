@@ -2,6 +2,7 @@ package com.pigman.community.controller;
 
 import com.pigman.community.dto.CommentDTO;
 import com.pigman.community.dto.QuestionDTO;
+import com.pigman.community.enums.CommentTypeEnum;
 import com.pigman.community.service.CommentService;
 import com.pigman.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class QuestionController {
         QuestionDTO questionDTO = questionService.findById(id);
 
 
-        List<CommentDTO> comments = commentService.listByQuestionId(id);
+        //查找问题的一级评论
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
         //累加评论
         questionService.incView(id);
