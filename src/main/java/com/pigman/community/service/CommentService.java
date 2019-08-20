@@ -5,10 +5,7 @@ import com.pigman.community.dto.CommentDTO;
 import com.pigman.community.enums.CommentTypeEnum;
 import com.pigman.community.exception.CustomizeErrorCode;
 import com.pigman.community.exception.CustomizeException;
-import com.pigman.community.mapper.CommentMapper;
-import com.pigman.community.mapper.QuestionExtMapper;
-import com.pigman.community.mapper.QuestionMapper;
-import com.pigman.community.mapper.UserMapper;
+import com.pigman.community.mapper.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +23,9 @@ public class CommentService {
 
     @Autowired
     private CommentMapper commentMapper;
+
+    @Autowired
+    private CommentExtMapper commentExtMapper;
 
     @Autowired
     private QuestionMapper questionMapper;
@@ -47,12 +47,18 @@ public class CommentService {
             if(comment.getType() == null || !CommentTypeEnum.isExist(comment.getType())){
                 throw new CustomizeException(CustomizeErrorCode.TYPE_PARAM_WRONG);
             }
+            comment.setCommentCount((long) 0);
             if(comment.getType() == CommentTypeEnum.COMMENT.getType()){
                 //回复评论
                 Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
                 if(dbComment == null){
                     throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
                 }
+                Comment parentComment = new Comment();
+                parentComment.setId(comment.getParentId());
+                parentComment.setCommentCount((long) 1);
+
+                commentExtMapper.incComment(parentComment);
                 commentMapper.insert(comment);
             }else{
                 //回复问题

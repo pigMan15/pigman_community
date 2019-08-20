@@ -86,10 +86,10 @@ function onCollapse (e){
                 e.setAttribute("data-collapse","in");
                 e.classList.add("active");
             }else{
-                $.each(data.data,function(index,comment){
+                $.each(data.data.reverse(),function(index,comment){
 
 
-
+                    //编写二级评论页面组成元素
                     var mediaLeftElement = $("<div/>",{
                         "class":"media-left"
                     }).append($("<img/>",{
@@ -126,6 +126,7 @@ function onCollapse (e){
                     subCommentContainer.prepend(commentElement);
 
                 });
+
                 comments.addClass("in");
                 e.setAttribute("data-collapse","in");
                 e.classList.add("active");
