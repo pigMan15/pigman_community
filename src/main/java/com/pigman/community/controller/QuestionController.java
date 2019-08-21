@@ -32,11 +32,15 @@ public class QuestionController {
         //查找问题的一级评论
         List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
+        //查找与tag相关的问题
+        List<QuestionDTO> releatedQuestions = questionService.selectReleated(questionDTO);
+
         //累加评论
         questionService.incView(id);
         //System.out.println(questionDTO.toString());
         model.addAttribute("question",questionDTO);
         model.addAttribute("comments",comments);
+        model.addAttribute("releatedQuestions",releatedQuestions);
         return "question";
     }
 

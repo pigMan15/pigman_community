@@ -2,6 +2,7 @@ package com.pigman.community.mapper;
 
 import com.pigman.community.domain.Question;
 import com.pigman.community.domain.QuestionExample;
+import com.pigman.community.dto.QuestionDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -11,4 +12,5 @@ public interface QuestionExtMapper {
 
     int  incView(Question record);
     int incComment(Question question);
+    List<Question> selectReleated(Question Question);
 }
