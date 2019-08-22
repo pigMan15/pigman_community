@@ -200,6 +200,11 @@ public class QuestionService {
     }
 
 
+    /**
+     * 根据tag查询相关问题
+     * @param queryDTO
+     * @return
+     */
     public  List<QuestionDTO> selectReleated(QuestionDTO queryDTO) {
         if(StringUtils.isBlank(queryDTO.getTag())){
             return new ArrayList<>();
