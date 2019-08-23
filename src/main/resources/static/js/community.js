@@ -163,6 +163,5 @@ function showSelectTag(){
 }
 
 function displaySelectTag(){
-    console.log('1')
-    $("#select-tag").style.display="none"
+    $("#select-tag").hide();
 }

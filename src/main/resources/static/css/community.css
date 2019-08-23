@@ -84,6 +84,10 @@ body{
     vertical-align: 3px;
 }
 
+.edit-icon{
+    margin-left:10px;
+}
+
 .question-title{
     margin-top:30px;
 }
@@ -100,6 +104,8 @@ body{
 
 .select-tag{
     margin:10px;
+    white-space: normal;
+    display:inline-block;
 }
 
 .select-tag-pane{
@@ -118,3 +124,8 @@ body{
     margin: 10px 0;
 }
 
+
+.publish-tag {
+    white-space:normal;
+    margin:10px;
+}
