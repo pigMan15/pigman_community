@@ -78,7 +78,7 @@ public class QuestionService {
         }
 
         //装配pagination
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         paginationDTO.setPagination(page,totalPage);
 
         return paginationDTO;
@@ -113,15 +113,9 @@ public class QuestionService {
         example.createCriteria()
                 .andCreatorEqualTo(userId);
         List<Question> questions = questionMapper.selectByExampleWithRowbounds(example,new RowBounds(offset,size));
-       List<QuestionDTO> questionDTOList = new ArrayList<>();
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+
         User user = new User();
-
-
-
-
-
-
-
 
         for(Question question : questions){
             user=userMapper.selectByPrimaryKey(question.getCreator());
@@ -132,7 +126,7 @@ public class QuestionService {
         }
 
         //装配pagination
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         paginationDTO.setPagination(page,totalPage);
 
         return paginationDTO;

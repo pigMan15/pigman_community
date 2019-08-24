@@ -3,6 +3,8 @@ package com.pigman.community.service;
 import com.pigman.community.domain.*;
 import com.pigman.community.dto.CommentDTO;
 import com.pigman.community.enums.CommentTypeEnum;
+import com.pigman.community.enums.NotificationTypeEnum;
+import com.pigman.community.enums.NotificationEnum;
 import com.pigman.community.exception.CustomizeErrorCode;
 import com.pigman.community.exception.CustomizeException;
 import com.pigman.community.mapper.*;
@@ -38,9 +40,11 @@ public class CommentService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private NotificationMapper notificationMapper;
 
     @Transactional
-    public void insert(Comment comment) {
+    public void insert(Comment comment, User user) {
             if(comment.getParentId() == null || comment.getParentId() == 0){
                 throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
             }
@@ -58,8 +62,23 @@ public class CommentService {
                 parentComment.setId(comment.getParentId());
                 parentComment.setCommentCount((long) 1);
 
+
+
+                Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+                if(question == null){
+                    throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+                }
+
+
                 commentExtMapper.incComment(parentComment);
                 commentMapper.insert(comment);
+
+                createNotify(comment, dbComment.getCommentator(), user.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT,question.getId());
+
+
+
+
+
             }else{
                 //回复问题
                 Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -69,6 +88,7 @@ public class CommentService {
                 commentMapper.insert(comment);
                 question.setCommentCount(1);
                 questionExtMapper.incComment(question);
+                createNotify(comment,question.getCreator(),user.getName(),question.getTitle(), NotificationTypeEnum.REPLY_QUESTION,question.getId());
             }
     }
 
@@ -107,5 +127,27 @@ public class CommentService {
             return commentDTO;
         }).collect(Collectors.toList());
         return commentDTOList;
+    }
+
+    /**
+     * 记录回复消息到数据库
+     * @param comment
+     * @param receiver
+     * @param name
+     * @param title
+     * @param notificationEnum
+     * @param outerid
+     */
+    private void createNotify(Comment comment, Long receiver, String name, String title, NotificationTypeEnum notificationEnum,Long outerid){
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setNotifier(comment.getCommentator());
+        notification.setNotifierName(name);
+        notification.setReceiver(receiver);
+        notification.setType(notificationEnum.getType());
+        notification.setOuterTitle(title);
+        notification.setOuterid(outerid);//问题跳转id
+        notification.setStatu(NotificationEnum.UNREAD.getState());
+        notificationMapper.insert(notification);
     }
 }

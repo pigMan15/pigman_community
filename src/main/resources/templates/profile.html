@@ -19,17 +19,19 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span th:text="${sectionName}"></span></h2>
             <hr>
-            <div class="media" th:each="question:${pagination.questions}">
+            <div class="media" th:each="question:${pagination.data}" th:if="${section == 'questions'}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded" th:src="${question.user.avatarUrl}" alt="头像">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <h4 class="media-heading" >
+                        <a th:href="'/question/'+${question.id}" th:text="${question.title}" ></a>
+                    </h4>
                     <span th:text="${question.description}"></span><br/>
                     <span class="text-descr">
-                        <span th:text="${question.viewCount}"/>个评论 •
+                        <span th:text="${question.commentCount}"/>个评论 •
                         <sapn th:text="${question.viewCount}"/>次浏览 •
                         <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"/>
                         <span class="glyphicon glyphicon-pencil edit-icon "  >
@@ -38,19 +40,24 @@
                      </span>
                 </div>
             </div>
-
+            <div class="media" th:each="notification:${pagination.data}" th:if="${section == 'replies'}">
+                <p>
+                    <span th:text="${notification.notifierName + ' '+notification.typeName}"></span>
+                    <a th:href="@{'/notification/'+${notification.id}}" th:text="${notification.outerTitle}"></a>
+                    <span class="label label-danger" th:if="${notification.statu == 0}">未读</span>
+                </p>
+            </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3><div class="list-group">
+            <h3>
+                <div class="list-group">
                 <a href="/profile/questions"  th:class="${section=='questions' ? 'list-group-item active':'list-group-item'}">我的问题</a>
                 <a href="/profile/replies" th:class="${section=='replies' ? 'list-group-item active':'list-group-item'}">
                     最新回复
-                    <span class="badge">4</span>
+                    <span class="badge" th:text="${unReadCount}"></span>
                 </a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div></h3>
+                </div>
+            </h3>
         </div>
     </div>
 
