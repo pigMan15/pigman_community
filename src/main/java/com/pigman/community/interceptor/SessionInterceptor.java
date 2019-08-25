@@ -1,8 +1,10 @@
 package com.pigman.community.interceptor;
 
+import com.pigman.community.domain.Notification;
 import com.pigman.community.domain.User;
 import com.pigman.community.domain.UserExample;
 import com.pigman.community.mapper.UserMapper;
+import com.pigman.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,6 +20,9 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -35,6 +40,9 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if(users.size() != 0){
                         //System.out.println(user.toString());
                         request.getSession().setAttribute("user",users.get(0));
+                        Long unReadCount = notificationService.unReadCount(users.get(0).getId());
+                        request.getSession().setAttribute("unReadCount",unReadCount);
+
                     }else{
                         //当用户数据从数据库中被删除时，设置session中user的值为null，回到登录状态
                         request.getSession().setAttribute("user",null);
