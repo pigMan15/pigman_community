@@ -1,6 +1,8 @@
 package com.pigman.community.controller;
 
 import com.pigman.community.dto.FileDTO;
+import com.pigman.community.exception.CustomizeErrorCode;
+import com.pigman.community.exception.CustomizeException;
 import com.pigman.community.provider.UcloudProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,12 @@ public class FileController {
         MultipartFile file = multipartHttpServletRequest.getFile("editormd-image-file");
 
         try {
-            ucloudProvider.upload(file.getInputStream(),file.getContentType(),file.getOriginalFilename());
+            String fileName = ucloudProvider.upload(file.getInputStream(),file.getContentType(),file.getOriginalFilename());
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setSuccess(1);
+            fileDTO.setMessage("上传成功");
+            fileDTO.setUrl(fileName);
+            return fileDTO;
         } catch (IOException e) {
             e.printStackTrace();
         }

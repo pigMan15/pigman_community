@@ -9,6 +9,8 @@ import cn.ucloud.ufile.exception.UfileClientException;
 import cn.ucloud.ufile.exception.UfileServerException;
 import cn.ucloud.ufile.http.OnProgressListener;
 
+import com.pigman.community.exception.CustomizeErrorCode;
+import com.pigman.community.exception.CustomizeException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,9 @@ public class UcloudProvider {
     public String privateKey;
 
 
+
+    private String bucket;
+
     /**
      * 上传sdk
      * @param inputStream
@@ -41,7 +46,7 @@ public class UcloudProvider {
         if(filePaths.length > 1){
             generatedFileName = UUID.randomUUID().toString()+"."+filePaths[filePaths.length-1];
         }else{
-            return null;
+            throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         }
 
         try {
@@ -49,11 +54,12 @@ public class UcloudProvider {
             ObjectAuthorization OBJECT_AUTHORIZER = new UfileObjectLocalAuthorization(
                     publicKey,privateKey);
             ObjectConfig config = new ObjectConfig("cn-bj", "ufileos.com");
+            bucket="pigman-community";
 
             PutObjectResultBean response = UfileClient.object(OBJECT_AUTHORIZER, config)
                     .putObject(inputStream, mimeType)
                     .nameAs(generatedFileName)
-                    .toBucket("pigman-community")
+                    .toBucket(bucket)
                     /**
                      * 是否上传校验MD5, Default = true
                      */
@@ -72,12 +78,24 @@ public class UcloudProvider {
                         }
                     })
                     .execute();
+
+                    //上传成功则获取文件地址
+                    if(response != null && response.getRetCode() == 0){
+                        String fileUrl = UfileClient.object(OBJECT_AUTHORIZER, config)
+                                .getDownloadUrlFromPrivateBucket(generatedFileName, bucket, 24*60*60)
+                                .createUrl();
+                        return fileUrl;
+                    }else{
+                        throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
+                    }
         } catch (UfileClientException e) {
-            e.printStackTrace();
+
+            throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         } catch (UfileServerException e) {
-            e.printStackTrace();
+
+            throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         }
-        return generatedFileName;
+
     }
 
 }
