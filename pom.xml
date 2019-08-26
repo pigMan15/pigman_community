@@ -104,6 +104,13 @@
         </dependency>
 
 
+        <!-- ufile sdk-->
+        <dependency>
+            <groupId>cn.ucloud.ufile</groupId>
+            <artifactId>ufile-client-java</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
     </dependencies>
 
 
