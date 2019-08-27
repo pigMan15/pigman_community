@@ -23,13 +23,22 @@ public class UcloudProvider {
 
 
     @Value("${ucloud.public-key}")
-    public String publicKey;
+    private String publicKey;
 
     @Value("${ucloud.private-key}")
-    public String privateKey;
+    private String privateKey;
 
 
+    @Value("${ucloud.region}")
+    private String region;
 
+    @Value("${ucloud.suffix}")
+    private String suffix;
+
+    @Value("${ucloud.expiresDuration}")
+    private Integer expiresDuration;
+
+    @Value("${ucloud.bucket_name}")
     private String bucket;
 
     /**
@@ -53,8 +62,8 @@ public class UcloudProvider {
             //生成Bucket,配置
             ObjectAuthorization OBJECT_AUTHORIZER = new UfileObjectLocalAuthorization(
                     publicKey,privateKey);
-            ObjectConfig config = new ObjectConfig("cn-bj", "ufileos.com");
-            bucket="pigman-community";
+            ObjectConfig config = new ObjectConfig(region, suffix);
+
 
             PutObjectResultBean response = UfileClient.object(OBJECT_AUTHORIZER, config)
                     .putObject(inputStream, mimeType)
@@ -82,7 +91,7 @@ public class UcloudProvider {
                     //上传成功则获取文件地址
                     if(response != null && response.getRetCode() == 0){
                         String fileUrl = UfileClient.object(OBJECT_AUTHORIZER, config)
-                                .getDownloadUrlFromPrivateBucket(generatedFileName, bucket, 24*60*60)
+                                .getDownloadUrlFromPrivateBucket(generatedFileName, bucket, expiresDuration)
                                 .createUrl();
                         return fileUrl;
                     }else{

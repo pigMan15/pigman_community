@@ -139,6 +139,9 @@ public class CommentService {
      * @param outerid
      */
     private void createNotify(Comment comment, Long receiver, String name, String title, NotificationTypeEnum notificationEnum,Long outerid){
+        if(receiver == comment.getCommentator()){
+            return;
+        }
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setNotifier(comment.getCommentator());
