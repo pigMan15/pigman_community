@@ -8,6 +8,7 @@ import com.pigman.community.dto.GithubUser;
 import com.pigman.community.mapper.UserMapper;
 import com.pigman.community.provider.GithubProvider;
 import com.pigman.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -75,6 +77,7 @@ public class AuthorizeController {
             return "redirect:/";
         }else{
             //登录失败
+            log.error("callback github error,{}",githubUser);
             return "redirect:/";
         }
     }
