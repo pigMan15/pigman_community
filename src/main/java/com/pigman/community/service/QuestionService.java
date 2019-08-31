@@ -5,6 +5,7 @@ import com.pigman.community.domain.QuestionExample;
 import com.pigman.community.domain.User;
 import com.pigman.community.dto.PaginationDTO;
 import com.pigman.community.dto.QuestionDTO;
+import com.pigman.community.dto.QuestionQueryDTO;
 import com.pigman.community.exception.CustomizeErrorCode;
 import com.pigman.community.exception.CustomizeException;
 import com.pigman.community.mapper.QuestionExtMapper;
@@ -38,10 +39,19 @@ public class QuestionService {
 
 
 
-    public PaginationDTO list(Integer page, Integer size){
+    public PaginationDTO list(String search,Integer page, Integer size){
+
+
+        if(StringUtils.isNotBlank(search)){
+            String[] splits = StringUtils.split(search," ");
+            search = Arrays.stream(splits).collect(Collectors.joining("|"));
+        }
+        PaginationDTO paginationDTO = new PaginationDTO();
 
         //对page < 0 或page > totalPage 非法请求进行处理
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount = questionExtMapper.countBysearch(questionQueryDTO);
         Integer totalPage;
         if(totalCount % size == 0){
             totalPage = totalCount / size;
@@ -58,11 +68,16 @@ public class QuestionService {
         //偏移量
         Integer offset  = size*(page-1);
 
-        PaginationDTO paginationDTO = new PaginationDTO();
 
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(offset,size));
+
+
+
+
+
+
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         User user = new User();
