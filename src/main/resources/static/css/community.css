@@ -129,3 +129,8 @@ body{
     white-space:normal;
     margin:10px;
 }
+
+.footer{
+    text-align: center;
+    font-size: 12px;
+}
