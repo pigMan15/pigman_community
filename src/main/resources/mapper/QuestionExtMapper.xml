@@ -63,7 +63,12 @@
         and  title regexp #{search}
       </if>
     </where>
-    order by gmt_create desc limit #{page},#{size}
+    <if  test=" mykey == 'hot' ">
+      order by  comment_count  desc limit #{page},#{size}
+    </if>
+    <if test=" mykey == 'latest' ">
+      order by gmt_create desc limit #{page},#{size}
+    </if>
   </select>
 
 </mapper>

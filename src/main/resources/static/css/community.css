@@ -6,7 +6,9 @@ body{
 
 .main{
     background-color: white;
-    margin:30px;
+    margin:40px;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 
@@ -133,4 +135,8 @@ body{
 .footer{
     text-align: center;
     font-size: 12px;
+}
+
+.nav-category{
+    margin-top: 20px;
 }
