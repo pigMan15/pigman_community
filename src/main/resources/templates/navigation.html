@@ -45,7 +45,8 @@
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">
-                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='3605232d8c7cceafdbe2',redirect_uri=${#httpServletRequest.getRequestURL()+'callback'},scope='user',state=1)}">登录</a>
+                        <span th:text="${#httpServletRequest.getServerPort()}"></span>
+                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='3605232d8c7cceafdbe2',redirect_uri='http://'+${#httpServletRequest.getServerName()+':'}+${#httpServletRequest.getServerPort()+'/callback'},scope='user',state=1)}">登录</a>
 <!--                        <a href="https://github.com/login/oauth/authorize?client_id=3605232d8c7cceafdbe2&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>-->
                     </li>
 
