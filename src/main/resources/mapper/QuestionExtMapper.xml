@@ -52,6 +52,9 @@
         <if test="search != 'null' and search != '' and search != null ">
             and  title regexp #{search}
         </if>
+        <if test="mykey == 'zero' ">
+        and comment_count = 0
+        </if>
     </where>
 
   </select>
@@ -62,13 +65,17 @@
       <if test="search != 'null' and search != '' and search != null ">
         and  title regexp #{search}
       </if>
+      <if test="mykey == 'zero' ">
+        and comment_count = 0 order by gmt_create desc limit #{page},#{size}
+      </if>
     </where>
     <if  test=" mykey == 'hot' ">
-      order by  comment_count  desc limit #{page},#{size}
+      order by  comment_count  desc, view_count desc  limit #{page},#{size}
     </if>
     <if test=" mykey == 'latest' ">
       order by gmt_create desc limit #{page},#{size}
     </if>
+
   </select>
 
 </mapper>

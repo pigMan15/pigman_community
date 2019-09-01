@@ -32,9 +32,10 @@
 
                 <ul class="nav nav-pills  nav-category ">
 
-                    <li role="presentation" class="active"><a href="/latest">最新</a></li>
-                    <li role="presentation"><a href="/hot">最热</a></li>
-                    <li role="presentation"><a href="/zero">消灭0回复</a></li>
+
+                    <li role="presentation" th:class="${path == 'latest' ? 'active' : ''} "><a href="/latest">最新</a></li>
+                    <li role="presentation" th:class="${path == 'hot' ? 'active' : ''} "><a href="/hot">最热</a></li>
+                    <li role="presentation" th:class="${path == 'zero' ? 'active' : ''} "><a href="/zero">消灭0回复</a></li>
 
                 </ul>
 
@@ -54,6 +55,9 @@
 <!--                    <span th:text="${question.description}"></span><br/>-->
                     <span class="text-descr">
                         <span th:text="${question.commentCount}"/>个评论 • <sapn th:text="${question.viewCount}"/>次浏览 • <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
+                        <span class="question-quickreply" th:if="${path} == 'zero' ">
+                         <a th:href="'/question/'+${question.id}"  >回复</a>
+                        </span>
                     </span>
                 </div>
             </div>

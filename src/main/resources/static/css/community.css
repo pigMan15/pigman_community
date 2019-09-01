@@ -104,6 +104,10 @@ body{
     padding-left:0;
 }
 
+.question-quickreply{
+    float:right
+}
+
 .select-tag{
     margin:10px;
     white-space: normal;

@@ -34,15 +34,28 @@ public class IndexController {
                         @RequestParam(name="size",defaultValue = "5") Integer size,
                         @RequestParam(name="search",required = false) String search){
 
+        if(StringUtils.equals(action,"index")){
+            request.getSession().setAttribute("search", "");
+            action="latest";
+        }
+
+        if(search != null) {
+            request.getSession().setAttribute("search", search);
+        }else{
+            search = (String) request.getSession().getAttribute("search");
+        }
         System.out.println(action);
         PaginationDTO paginationDTO = null;
+
+
+
         if(StringUtils.equals(action,"latest") || StringUtils.equals(action,"error")){
                 action ="latest";
                 paginationDTO = questionService.list(action,search,page,size);
         }else if(StringUtils.equals(action,"hot")){
              paginationDTO = questionService.list(action,search,page,size);
         }else if(StringUtils.equals(action,"zero")) {
-//             paginationDTO = questionService.list(search,page,size);
+            paginationDTO = questionService.list(action,search,page,size);
         }
 
         model.addAttribute("pagination",paginationDTO);

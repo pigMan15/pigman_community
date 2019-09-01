@@ -51,7 +51,7 @@ public class QuestionService {
         //对page < 0 或page > totalPage 非法请求进行处理
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
-
+        questionQueryDTO.setMykey(key);
         Integer totalCount = questionExtMapper.countBysearch(questionQueryDTO);
         Integer totalPage;
         if(totalCount % size == 0){
@@ -78,7 +78,7 @@ public class QuestionService {
 
         questionQueryDTO.setPage(offset);
         questionQueryDTO.setSize(size);
-        questionQueryDTO.setMykey(key);
+
         List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();

@@ -15,7 +15,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">pigMan的社区</a>
+                <a class="navbar-brand" href="/index">pigMan的社区</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,9 +23,10 @@
 
                 <form class="navbar-form navbar-left" action="/" method="get">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="搜索问题">
+                        <input type="text" class="form-control" name="search" placeholder="搜索问题" th:value="${search}">
+
                     </div>
-                    <button type="submit" class="btn btn-default">submit</button>
+                    <button type="submit" class="btn btn-default">查询</button>
                 </form>
 
 
