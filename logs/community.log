@@ -848,3 +848,45 @@ org.springframework.expression.spel.SpelEvaluationException: EL1030E: The operat
 2019-09-01 08:48:44.741 DEBUG 15859 --- [http-nio-8080-exec-8] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
 2019-09-01 08:48:44.741 DEBUG 15859 --- [http-nio-8080-exec-8] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
 2019-09-01 08:48:44.742 DEBUG 15859 --- [http-nio-8080-exec-8] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:53.972 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.QuestionExtMapper.countBysearch  : ==>  Preparing: select count(*) from question 
+2019-09-01 10:44:53.975 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.QuestionExtMapper.countBysearch  : ==> Parameters: 
+2019-09-01 10:44:53.985 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.QuestionExtMapper.countBysearch  : <==      Total: 1
+2019-09-01 10:44:53.988 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.Q.selectBySearch                 : ==>  Preparing: select * from question order by gmt_create desc limit ?,? 
+2019-09-01 10:44:53.992 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.Q.selectBySearch                 : ==> Parameters: 0(Integer), 5(Integer)
+2019-09-01 10:44:54.006 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.Q.selectBySearch                 : <==      Total: 5
+2019-09-01 10:44:54.007 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.009 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.011 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.016 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.017 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.018 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.018 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.019 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 48(Long)
+2019-09-01 10:44:54.021 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.022 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.022 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.023 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.025 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.025 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.026 DEBUG 15859 --- [http-nio-8080-exec-6] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.291 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.QuestionExtMapper.countBysearch  : ==>  Preparing: select count(*) from question 
+2019-09-01 10:44:54.291 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.QuestionExtMapper.countBysearch  : ==> Parameters: 
+2019-09-01 10:44:54.292 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.QuestionExtMapper.countBysearch  : <==      Total: 1
+2019-09-01 10:44:54.293 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.Q.selectBySearch                 : ==>  Preparing: select * from question order by gmt_create desc limit ?,? 
+2019-09-01 10:44:54.293 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.Q.selectBySearch                 : ==> Parameters: 0(Integer), 5(Integer)
+2019-09-01 10:44:54.294 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.Q.selectBySearch                 : <==      Total: 5
+2019-09-01 10:44:54.294 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.295 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.295 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.296 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.296 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.296 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.297 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.297 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 48(Long)
+2019-09-01 10:44:54.298 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.299 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.299 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.300 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2019-09-01 10:44:54.301 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL from USER where ID = ? 
+2019-09-01 10:44:54.301 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 47(Long)
+2019-09-01 10:44:54.301 DEBUG 15859 --- [http-nio-8080-exec-3] c.p.c.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
