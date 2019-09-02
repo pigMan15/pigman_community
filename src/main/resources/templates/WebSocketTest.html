@@ -42,20 +42,21 @@
                     <div>bio:<span>特立独行的你！</span></div>
                 </li>
                 <li>
-                    <div>date:<span>2018-06-30</span></div>
+                    <div>Time:<span th:text="${#dates.format(new java.util.Date().getTime(),'yyyy-MM-dd hh:mm')}">2018-06-30</span></div>
                 </li>
+<!--                <li>-->
+<!--                    名称：<input type="text" id="nickname"/>-->
+<!--                </li>-->
                 <li>
-                    名称：<input type="text" id="nickname"/>
-                </li>
-                <li>
-                    <button onclick="connectWebSocket()">上线</button>
-                    <button onclick="closeWebSocket()">下线</button>
+                    <button type="button" class="btn btn-success" th:onclick="connectWebSocket([[${session.user}]]);">上线</button>
+                    <button type="button" class="btn btn-success" onclick="closeWebSocket()">下线</button>
                 </li>
                 <li>
                     频道号:<input type="text" id="toUser"/>
                 </li>
+
                 <li>
-                    <button th:onclick="send(${session.user})">发送消息</button>
+
                 </li>
                 <li>
                     <div id="status"></div>
@@ -73,15 +74,28 @@
 
         </div>
         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <h3>在线聊天室</h3>
+            <h3>水吧</h3>
 
-            <hr>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="overflow-y:scroll; overflow-x:scroll; height:400px; border:1px solid #F00;" id="message">
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="overflow-y:scroll; overflow-x:scroll; height:400px;" id="message">
 
             </div>
 
 
-                <input class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-control" rows="10" cols="100" id="text" type="text"/>
+            <hr  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 ">
+                    <input style="width:100%;margin-top:5px" rows="10" cols="100" id="text" type="text"/>
+                </div>
+                <div  class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <button class="btn btn-info" th:onclick="send([[${session.user}]]);">
+                       <span class="glyphicon glyphicon-send"></span>
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 

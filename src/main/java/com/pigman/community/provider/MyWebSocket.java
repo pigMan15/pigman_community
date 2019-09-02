@@ -1,6 +1,7 @@
 package com.pigman.community.provider;
 
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pigman.community.dto.SocketMsg;
 import org.springframework.stereotype.Component;
@@ -41,7 +42,7 @@ public class MyWebSocket {
         webSocketSet.add(this);
         System.out.println("有新连接加入！" +name +"当前在线总人数为： "+webSocketSet.size());
        // this.session.getAsyncRemote().sendText(name+"   成功连接上WebSocket(其频道号: "+session.getId()+")-->当前在线总人数为："+webSocketSet.size());
-        broadcast(name+":成功连接上WebSocket(其频道号: "+session.getId()+")-->当前在线总人数为："+webSocketSet.size());
+        broadcast(name+"|进入了房间(其频道号为"+session.getId()+")-->当前在线总人数为："+webSocketSet.size()+"||0");
     }
 
     /**
@@ -72,13 +73,13 @@ public class MyWebSocket {
                 Session fromSession = map.get(socketMsg.getFromUser());
                 Session toSession = map.get(socketMsg.getToUser());
                 if(toSession != null){
-                    fromSession.getAsyncRemote().sendText(name+":"+socketMsg.getMsg());
-                    toSession.getAsyncRemote().sendText(name+":"+socketMsg.getMsg());
+                    fromSession.getAsyncRemote().sendText(name+"|"+socketMsg.getMsg()+"|"+socketMsg.getAvatar()+"|2");
+                    toSession.getAsyncRemote().sendText(name+"|"+socketMsg.getMsg()+"|"+socketMsg.getAvatar()+"|2");
                 }else{
-                    fromSession.getAsyncRemote().sendText("系统消息：对方不在线或者您输入的频道号不对");
+                    fromSession.getAsyncRemote().sendText("|系统消息：对方不在线或者您输入的频道号不对||1");
                 }
             }else{
-                broadcast(name+":"+socketMsg.getMsg());
+                broadcast(name+"|"+socketMsg.getMsg()+"|"+socketMsg.getAvatar()+"|2");
             }
         } catch (IOException e) {
             e.printStackTrace();

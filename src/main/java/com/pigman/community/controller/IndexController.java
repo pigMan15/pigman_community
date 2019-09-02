@@ -26,6 +26,11 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
 
+    @GetMapping("/")
+    public String index1(){
+        return "redirect:/index";
+    }
+
     @GetMapping("/{action}")
     public String index(HttpServletRequest request,
                         Model model,
@@ -40,7 +45,7 @@ public class IndexController {
             requestURL= "http://"+request.getServerName()+":"+request.getServerPort();
             request.getSession().setAttribute("loginUrl",requestURL);
         }
-        //首页跳转，清除搜索条件
+        //首页默认跳转，清除搜索条件
         if(StringUtils.equals(action,"index")){
             request.getSession().setAttribute("search", "");
             action="latest";
