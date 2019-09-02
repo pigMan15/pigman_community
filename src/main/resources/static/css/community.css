@@ -162,3 +162,16 @@ body{
 .chat-person-info li{
     margin-top:15px;
 }
+
+.chat-info{
+    border-right:1px solid #eee;
+    height:600px;
+}
+
+.chat-contact{
+    border-right:1px solid #eee;
+    height:600px;
+    overflow-y:scroll;
+    overflow-x:scroll;
+
+}

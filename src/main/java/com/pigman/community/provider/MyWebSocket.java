@@ -42,7 +42,7 @@ public class MyWebSocket {
         webSocketSet.add(this);
         System.out.println("有新连接加入！" +name +"当前在线总人数为： "+webSocketSet.size());
        // this.session.getAsyncRemote().sendText(name+"   成功连接上WebSocket(其频道号: "+session.getId()+")-->当前在线总人数为："+webSocketSet.size());
-        broadcast(name+"|进入了房间(其频道号为"+session.getId()+")-->当前在线总人数为："+webSocketSet.size()+"||0");
+        broadcast(name+"|进入了房间,其频道号为"+session.getId()+"||0");
     }
 
     /**
@@ -52,6 +52,7 @@ public class MyWebSocket {
     public void onClose(){
         webSocketSet.remove(this);
         System.out.println("一用户退出连接！当前在线总人数为："+webSocketSet.size());
+        broadcast(name+"|离开了房间"+"||3");
     }
 
     /**
@@ -98,6 +99,7 @@ public class MyWebSocket {
     public void onError(Session session ,Throwable error){
         System.out.println("发生错误");
         error.printStackTrace();
+        webSocketSet.remove(this);
     }
 
     /**

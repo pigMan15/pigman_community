@@ -19,10 +19,10 @@
 
 
 
-
+<div th:insert="navigation::nav"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 chat-info">
             <div class=" chat-avatar" >
                 <div class="media-left">
                     <a href="#">
@@ -47,19 +47,20 @@
 <!--                <li>-->
 <!--                    名称：<input type="text" id="nickname"/>-->
 <!--                </li>-->
-                <li>
-                    <button type="button" class="btn btn-success" th:onclick="connectWebSocket([[${session.user}]]);">上线</button>
-                    <button type="button" class="btn btn-success" onclick="closeWebSocket()">下线</button>
-                </li>
+
                 <li>
                     频道号:<input type="text" id="toUser"/>
                 </li>
 
                 <li>
-
+                    在线人数&nbsp;&nbsp;   <span id="activeNums"></span>
                 </li>
                 <li>
                     <div id="status"></div>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-success" th:onclick="connectWebSocket([[${session.user}]]);">上线</button>
+                    <button type="button" class="btn btn-success" onclick="closeWebSocket()">下线</button>
                 </li>
             </ul>
 
@@ -70,11 +71,9 @@
 
 
         </div>
-        <div id="contact" class="col-lg-2 col-md-12 col-sm-12 col-xs-12" style="overflow-y:scroll;">
-
-        </div>
+        <div id="contact" class="col-lg-2 col-md-12 col-sm-12 col-xs-12 chat-contact" ></div>
         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <h3>水吧</h3>
+            <h3><span class="glyphicon glyphicon-fire"></span>&nbsp;聊一聊</h3>
 
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="overflow-y:scroll; overflow-x:scroll; height:400px;" id="message">
