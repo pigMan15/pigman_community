@@ -37,4 +37,7 @@ public class UserService {
                userMapper.updateByExampleSelective(updateUser,example);
            }
     }
+
+
+
 }

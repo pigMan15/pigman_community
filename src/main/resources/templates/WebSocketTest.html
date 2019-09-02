@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocketTest</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community.css">
+    <script src="js/jquery.min.js" type="application/javascript"></script>
+    <script  src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/websocket.js" type="application/javascript"></script>
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+        });
+    </script>
+</head>
+<body>
+
+
+
+
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class=" chat-avatar" >
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded" th:src="${session.user != null ? session.user.avatarUrl : '/images/default-avatar.png'}" alt="头像">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" >
+                        <a th:text="${session.user != null ? session.user.name: '匿名用户'}" ></a>
+                    </h4>
+                    </span>
+                </div>
+            </div>
+
+            <ul class="chat-person-info">
+                <li>
+                    <div>bio:<span>特立独行的你！</span></div>
+                </li>
+                <li>
+                    <div>date:<span>2018-06-30</span></div>
+                </li>
+                <li>
+                    名称：<input type="text" id="nickname"/>
+                </li>
+                <li>
+                    <button onclick="connectWebSocket()">上线</button>
+                    <button onclick="closeWebSocket()">下线</button>
+                </li>
+                <li>
+                    频道号:<input type="text" id="toUser"/>
+                </li>
+                <li>
+                    <button th:onclick="send(${session.user})">发送消息</button>
+                </li>
+                <li>
+                    <div id="status"></div>
+                </li>
+            </ul>
+
+
+
+
+
+
+
+        </div>
+        <div id="contact" class="col-lg-2 col-md-12 col-sm-12 col-xs-12" style="overflow-y:scroll;">
+
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+            <h3>在线聊天室</h3>
+
+            <hr>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="overflow-y:scroll; overflow-x:scroll; height:400px; border:1px solid #F00;" id="message">
+
+            </div>
+
+
+                <input class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-control" rows="10" cols="100" id="text" type="text"/>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

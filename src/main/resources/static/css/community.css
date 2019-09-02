@@ -29,6 +29,7 @@ body{
     padding-top:10px;
 }
 
+
 .text-descr{
     font-size: 12px;
     font-weight: normal;
@@ -143,4 +144,22 @@ body{
 
 .nav-category{
     margin-top: 20px;
+}
+
+
+.chat-avatar{
+    margin-top:20px;
+}
+
+.chat-person-info{
+    list-style: none;
+}
+
+.chat-person-info{
+    list-style: none;
+    padding-left:0px;
+}
+
+.chat-person-info li{
+    margin-top:15px;
 }
