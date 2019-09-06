@@ -53,6 +53,9 @@ public class QuestionService {
         questionQueryDTO.setSearch(search);
         questionQueryDTO.setMykey(key);
         Integer totalCount = questionExtMapper.countBysearch(questionQueryDTO);
+        if(totalCount == 0){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         Integer totalPage;
         if(totalCount % size == 0){
             totalPage = totalCount / size;

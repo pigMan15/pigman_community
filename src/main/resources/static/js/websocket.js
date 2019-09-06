@@ -34,7 +34,7 @@ function connectWebSocket(SessionUser){
                 return;
             }
         console.log(IsActive)
-        websocket = new WebSocket("ws://localhost:8080/websocket/"+name);
+        websocket = new WebSocket("ws://139.155.36.35:8080/websocket/"+name);
     }else{
         alert("当前浏览器不支持WebSocket")
     }

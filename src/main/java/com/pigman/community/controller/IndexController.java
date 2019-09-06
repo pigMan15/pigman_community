@@ -74,6 +74,9 @@ public class IndexController {
             paginationDTO = questionService.list(action,search,page,size);
         }
 
+        if(paginationDTO == null){
+            System.out.println("查无数据");
+        }
         model.addAttribute("pagination",paginationDTO);
         model.addAttribute("search",search);
         model.addAttribute("path",action);
