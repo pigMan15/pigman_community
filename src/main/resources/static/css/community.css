@@ -1,0 +1,145 @@
+
+body{
+    background-color: #efefef;
+}
+
+
+.main{
+    background-color: white;
+    margin:30px;
+}
+
+
+.btn-publish{
+    float:right;
+    margin-bottom:30px;
+}
+
+
+.media-object{
+    width:45px;
+    height:45px;
+}
+
+
+.media-body{
+    width: 10000px;
+    padding-top:10px;
+}
+
+.text-descr{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+.menu{
+    size:13px;
+    color:#999;
+}
+
+.jumbotron{
+    margin: 50px;
+}
+
+.comment{
+    margin: 10px 0;
+}
+
+.comments{
+    margin-bottom:10px;
+    border-bottom:1px solid #eee;
+    padding-bottom:5px;
+}
+
+.btn-comment{
+    float:right;
+    margin-bottom:15px;
+}
+
+.comment-sp{
+    margin-top:0;
+}
+
+.menu{
+    color: #999999;
+    margin-top:5px;
+}
+
+.menu .icon{
+    font-size:18px;
+    margin-right:6px;
+}
+
+.menu .active{
+    color:#499ef3;
+}
+
+.menu .icon:hover{
+    color:#499ef3;
+}
+
+.menu .commentCount{
+    font-size:16px;
+    vertical-align: 3px;
+}
+
+.edit-icon{
+    margin-left:10px;
+}
+
+.question-title{
+    margin-top:30px;
+}
+
+.question-tag{
+    margin-right:10px;
+}
+
+.question-releated{
+    list-style:none;
+    margin-left:0;
+    padding-left:0;
+}
+
+.select-tag{
+    margin:10px;
+    white-space: normal;
+    display:inline-block;
+}
+
+.select-tag-pane{
+    padding-top:10px;
+}
+
+.sub-comments{
+    border-radius:5px;
+    margin-top:10px;
+    border:1px solid #eee;
+    padding-top:10px;
+    margin-bottom:15px;
+}
+
+.sub-comments .btn{
+    margin: 10px 0;
+}
+
+
+.publish-tag {
+    white-space:normal;
+    margin:10px;
+}
+
+.footer{
+    text-align: center;
+    font-size: 12px;
+}
+
+
+.hot-tag{
+    padding:0px;
+}
+
+.nav-category{
+    margin-top:20px;
+}
